@@ -1,0 +1,8 @@
+{
+  "extends": [
+    "@lifeomic/standards/javascript"
+  ],
+  "env": {
+    "node": true
+  }
+}
