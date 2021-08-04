@@ -2,7 +2,7 @@
   "name": "@lifeomic/jest-config",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": "git@github.com:lifeomic/jest-config",
+  "repository": {},
   "author": "Development <development@lifeomic.com>",
   "license": "UNLICENSED",
   "files": [
@@ -12,6 +12,7 @@
     "lint": "eslint . --ext .js -f codeframe"
   },
   "devDependencies": {
+    "@lifeomic/dev-tools": "^8.17.0",
     "@lifeomic/eslint-config-standards": "^1.2.0",
     "conventional-changelog-conventionalcommits": "^4.6.0",
     "eslint": "^7.32.0",
