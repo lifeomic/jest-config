@@ -1,0 +1,29 @@
+{
+  "name": "@lifeomic/jest-config",
+  "version": "0.0.0",
+  "main": "index.js",
+  "repository": {},
+  "author": "Development <development@lifeomic.com>",
+  "license": "UNLICENSED",
+  "files": [
+    "jest-preset.js"
+  ],
+  "scripts": {
+    "lint": "eslint . --ext .js -f codeframe"
+  },
+  "devDependencies": {
+    "@lifeomic/dev-tools": "^8.17.0",
+    "@lifeomic/eslint-config-standards": "^1.2.0",
+    "conventional-changelog-conventionalcommits": "^4.6.0",
+    "eslint": "^7.32.0",
+    "semantic-release": "^17.4.4"
+  },
+  "peerDependencies": {
+    "jest": "26.x | 27.x",
+    "jest-circus": "26.x | 27.x",
+    "ts-jest": "26.x | 27.x"
+  },
+  "resolutions": {
+    "@semantic-release/npm": "7.0.x"
+  }
+}
