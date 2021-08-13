@@ -19,9 +19,10 @@
     "semantic-release": "^17.4.4"
   },
   "peerDependencies": {
-    "jest": "26.x | 27.x",
-    "jest-circus": "26.x | 27.x",
-    "ts-jest": "26.x | 27.x"
+    "@types/jest": ">=26",
+    "jest": ">=26",
+    "jest-circus": ">=26",
+    "ts-jest": ">=26"
   },
   "resolutions": {
     "@semantic-release/npm": "7.0.x"
