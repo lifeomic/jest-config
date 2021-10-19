@@ -5,6 +5,9 @@
   "repository": {},
   "author": "Development <development@lifeomic.com>",
   "license": "UNLICENSED",
+  "publishConfig": {
+    "access": "public"
+  },
   "files": [
     "jest-preset.js"
   ],
@@ -12,7 +15,6 @@
     "lint": "eslint . --ext .js -f codeframe"
   },
   "devDependencies": {
-    "@lifeomic/dev-tools": "^8.17.0",
     "@lifeomic/eslint-config-standards": "^1.2.0",
     "conventional-changelog-conventionalcommits": "^4.6.0",
     "eslint": "^7.32.0",
@@ -23,8 +25,5 @@
     "jest": ">=26",
     "jest-circus": ">=26",
     "ts-jest": ">=26"
-  },
-  "resolutions": {
-    "@semantic-release/npm": "7.0.x"
   }
 }

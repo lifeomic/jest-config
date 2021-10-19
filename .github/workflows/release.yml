@@ -1,0 +1,31 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 14
+      - name: Lint
+        run: |
+          yarn
+          yarn lint
+      - name: '[TEMPORARY] Modify Package Visibility'
+        env:
+          NPM_TOKEN: ${{secrets.LIFEOMIC_NPM_TOKEN}}
+        run: |
+          echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > .npmrc
+          npm access public @lifeomic/typescript-config
+      - name: Publish
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{secrets.LIFEOMIC_NPM_TOKEN}}
+        run: |
+          npx semantic-release
