@@ -17,6 +17,12 @@ jobs:
         run: |
           yarn
           yarn lint
+      - name: '[TEMPORARY] Modify Package Visibility'
+        env:
+          NPM_TOKEN: ${{secrets.LIFEOMIC_NPM_TOKEN}}
+        run: |
+          echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > .npmrc
+          npm access public @lifeomic/typescript-config
       - name: Publish
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
