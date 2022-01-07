@@ -19,13 +19,6 @@ jobs:
         run: yarn install
       - name: Test
         run: yarn test
-      - name: Coveralls
-        uses: coverallsapp/github-action@v1.1.2
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          path-to-lcov: coverage/lcov.info
-          flag-name: run-${{ matrix.node }}
-          parallel: true
   preRelease:
     needs: test
     runs-on: ubuntu-latest
@@ -46,12 +39,3 @@ jobs:
           NODE_AUTH_TOKEN: ${{secrets.LIFEOMIC_NPM_TOKEN}}
           PR_TAG: pr-${{ github.event.number }}
         run: npm publish --tag "${PR_TAG}"
-  finish:
-    needs: test
-    runs-on: ubuntu-latest
-    steps:
-      - name: Coveralls Finished
-        uses: coverallsapp/github-action@v1.1.2
-        with:
-          github-token: ${{ secrets.github_token }}
-          parallel-finished: true

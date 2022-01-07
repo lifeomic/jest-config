@@ -17,12 +17,6 @@ jobs:
         run: yarn install
       - name: Test
         run: yarn test
-      - name: Coverage Report
-        uses: coverallsapp/github-action@v1.1.2
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          path-to-lcov: .nyc_output/lcov.info
-          flag-name: master
       - name: Publish
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
