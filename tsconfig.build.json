@@ -4,6 +4,6 @@
     "noEmit": false
   },
   "include": [
-    "src/**/*"
+    "./index.ts"
   ]
 }
