@@ -15,6 +15,7 @@ Config was extracted from [lifeomic/typescript-tools](https://github.com/lifeomi
 ## expect enhancement
 Matchers can be exposed at the root level.  The library needs to be imported at some level to work.
 
+[Jest-extended setup instructions](https://github.com/jest-community/jest-extended#setup)
 
 ```json
 {
@@ -30,9 +31,20 @@ OR
 }
 ```
 
-The project can also be imported inside internal setup/test files using 
+The project can also be imported inside internal setup/test files using a setup file.
+`setup.ts`
 ```typescript
 import ('@lifeomic/jest-config');
+```
+
+To get typescript to see the types, it has been necessary to include something in the `tsconfig.json`.
+
+```json
+{
+  "include": [
+    "setup.ts"
+  ]
+}
 ```
 
 After importing, all matchers are now exposed at the root level, and can be not-ed.
