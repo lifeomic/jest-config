@@ -1,21 +1,31 @@
-name: PR Branch Build and Test
+name: PR Build and Test
 
-on: pull_request
+on:
+  pull_request
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
+    name: Node.JS ${{ matrix.node-version }}
+    strategy:
+      matrix:
+        node-version: [12.x, 14.x, 16.x]
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
-          node-version: 14
+          node-version: ${{ matrix.node-version }}
       - name: Install
-        run: |
-          yarn install
+        run: yarn install
       - name: Test
-        run: |
-          yarn test
+        run: yarn test
+      - name: Coveralls
+        uses: coverallsapp/github-action@v1.1.2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path-to-lcov: coverage/lcov.info
+          flag-name: run-${{ matrix.node }}
+          parallel: true
   preRelease:
     needs: test
     runs-on: ubuntu-latest
@@ -36,3 +46,12 @@ jobs:
           NODE_AUTH_TOKEN: ${{secrets.LIFEOMIC_NPM_TOKEN}}
           PR_TAG: pr-${{ github.event.number }}
         run: npm publish --tag "${PR_TAG}"
+  finish:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Coveralls Finished
+        uses: coverallsapp/github-action@v1.1.2
+        with:
+          github-token: ${{ secrets.github_token }}
+          parallel-finished: true
