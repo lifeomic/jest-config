@@ -1,31 +1,29 @@
-/// <reference types="jest" />
-
 import { Matchers } from 'expect/build/types';
 import matchers from 'expect/build/matchers';
 
-export type ValidKeys = keyof Omit<Matchers<any>, 'resolves' | 'rejects' | 'not'>
-export type Args<Matcher extends ValidKeys> = Parameters<Matchers<any>[Matcher]>;
+const invalidKeys = ['resolves', 'rejects', 'not'] as const;
 
-expect.extend({
-  expect: <Matcher extends ValidKeys>(actual: unknown, matcher: Matcher, ...args: Args<Matcher>) => {
-    const asMatcher = matchers[matcher];
-    return asMatcher.call({}, actual, ...args);
-  },
-});
+export type InvalidKeys = typeof invalidKeys[number];
+export type ValidKeys = keyof Omit<Matchers<any>, InvalidKeys>
 
-export type Matcherfunc<R = any> = <Matcher extends ValidKeys>(
-  matcher: Matcher,
-  expected?: Args<Matcher>[0],
-  options?: Args<Matcher>[1],
-) => R;
+type RootMatchers = {
+  [key in ValidKeys]: Matchers<any>[key];
+}
+
+const rootMatchers = {} as RootMatchers;
+
+Object.keys(matchers)
+  .filter((name): name is ValidKeys => !invalidKeys.includes(name as InvalidKeys))
+  .forEach((name) => {
+    const matcher = matchers[name];
+    rootMatchers[name] = matcher.bind({});
+  });
+
+expect.extend(rootMatchers);
 
 declare global {
   namespace jest {
-    interface Matchers<R> {
-      expect: Matcherfunc<R>;
-    }
-    interface Expect {
-      expect: Matcherfunc;
-    }
+    interface Expect extends RootMatchers {}
+    interface InverseAsymmetricMatchers extends RootMatchers {}
   }
 }
