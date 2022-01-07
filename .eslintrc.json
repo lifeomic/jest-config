@@ -1,8 +1,10 @@
 {
   "extends": [
-    "@lifeomic/standards/javascript"
+    "@lifeomic/standards"
   ],
   "env": {
-    "node": true
+    "node": true,
+    "jest": true,
+    "jest/globals": true
   }
 }

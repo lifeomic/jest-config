@@ -2,6 +2,7 @@
   "name": "@lifeomic/jest-config",
   "version": "0.0.0",
   "main": "index.js",
+  "types": "index.d.ts",
   "repository": {},
   "author": "Development <development@lifeomic.com>",
   "license": "MIT",
@@ -9,21 +10,32 @@
     "access": "public"
   },
   "files": [
-    "jest-preset.js"
+    "jest-preset.js",
+    "index.*"
   ],
   "scripts": {
-    "lint": "eslint . --ext .js -f codeframe"
+    "lint": "eslint . --ext .js -f codeframe --cache",
+    "postlint": "yarn tsc",
+    "pretest": "yarn lint",
+    "test":  "jest",
+    "prepublishOnly": "yarn tsc -p tsconfig.build.json"
   },
   "devDependencies": {
-    "@lifeomic/eslint-config-standards": "^1.2.0",
+    "@lifeomic/eslint-config-standards": "^2.1.0",
+    "@lifeomic/typescript-config": "^1.0.2",
+    "@types/jest": "^27.4.0",
     "conventional-changelog-conventionalcommits": "^4.6.0",
     "eslint": "^7.32.0",
-    "semantic-release": "^17.4.4"
+    "expect": "^27.4.6",
+    "jest": "^27.4.7",
+    "jest-circus": "^27.4.6",
+    "semantic-release": "^17.4.4",
+    "ts-jest": "^27.1.2",
+    "typescript": "^4.5.4"
   },
   "peerDependencies": {
-    "@types/jest": ">=26",
-    "jest": ">=26",
-    "jest-circus": ">=26",
-    "ts-jest": ">=26"
+    "jest": ">=27",
+    "jest-circus": ">=27",
+    "ts-jest": ">=27"
   }
 }

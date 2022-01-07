@@ -13,10 +13,10 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 14
-      - name: Lint
-        run: |
-          yarn
-          yarn lint
+      - name: Install
+        run: yarn install
+      - name: Test
+        run: yarn test
       - name: Publish
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
