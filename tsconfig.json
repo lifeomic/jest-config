@@ -6,6 +6,9 @@
     "declaration": true,
     "noEmit": true
   },
+  "files": [
+    "types/expect.d.ts"
+  ],
   "include": [
     "./index.ts",
     "test/**/*.ts"
