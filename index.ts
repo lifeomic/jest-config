@@ -1,9 +1,10 @@
-import { Matchers } from 'expect/build/types';
+import { Matchers } from 'expect';
 import matchers from 'expect/build/matchers';
 
 const invalidKeys = ['resolves', 'rejects', 'not'] as const;
 
 export type InvalidKeys = typeof invalidKeys[number];
+type InvalidMatchersKeys = keyof Omit<typeof matchers, InvalidKeys>;
 export type ValidKeys = keyof Omit<Matchers<any>, InvalidKeys>
 
 type RootMatchers = {
@@ -11,11 +12,12 @@ type RootMatchers = {
 }
 
 const rootMatchers = {} as RootMatchers;
+const keys = Object.keys(matchers) as (keyof Matchers<any>)[];
 
-Object.keys(matchers)
+keys
   .filter((name): name is ValidKeys => !invalidKeys.includes(name as InvalidKeys))
   .forEach((name) => {
-    const matcher = matchers[name];
+    const matcher = matchers[name as InvalidMatchersKeys];
     rootMatchers[name] = matcher.bind({});
   });
 
