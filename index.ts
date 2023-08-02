@@ -18,12 +18,14 @@ keys
   .filter((name): name is ValidKeys => !invalidKeys.includes(name as InvalidKeys))
   .forEach((name) => {
     const matcher = matchers[name as InvalidMatchersKeys];
-    rootMatchers[name] = matcher.bind({});
+    // @ts-expect-error Can't match everything correctly
+    rootMatchers[name] = matcher.bind({ customTesters: [] });
   });
 
 expect.extend(rootMatchers);
 
 declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace jest {
     interface Expect extends RootMatchers {}
     interface InverseAsymmetricMatchers extends RootMatchers {}
