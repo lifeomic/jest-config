@@ -2,7 +2,7 @@
 Shared Jest config utils etc.
 
 ## preset
-Publish a preset file for jest. Jest [26](https://jestjs.io/docs/26.x/configuration#preset-string)  [27](https://jestjs.io/docs/configuration#preset-string)
+Publish a preset file for jest. Jest [29](https://jestjs.io/docs/29.x/configuration#preset-string)
 
 ```json
 {
