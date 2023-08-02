@@ -34,6 +34,7 @@
     "typescript": "^5.1.6"
   },
   "peerDependencies": {
-    "jest": ">=27"
+    "jest": ">=29",
+    "expect": ">=29"
   }
 }
